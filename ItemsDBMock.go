@@ -11,9 +11,9 @@ import (
 
 var itemsDB Items
 
-func loadItems(vdmFileName string) {
+func loadItems(itemFileName string) {
 	startTime := time.Now()
-	itemFile, err := os.Open(vdmFileName)
+	itemFile, err := os.Open(itemFileName)
 	if err != nil {
 		log.Panicf("Error when reading file: ", err.Error())
 	}
