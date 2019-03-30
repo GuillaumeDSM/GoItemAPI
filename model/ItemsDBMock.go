@@ -11,7 +11,7 @@ import (
 
 var itemsDB Items
 
-func .oadItems(itemFileName string) {
+func LoadItems(itemFileName string) {
 	startTime := time.Now()
 	itemFile, err := os.Open(itemFileName)
 	if err != nil {

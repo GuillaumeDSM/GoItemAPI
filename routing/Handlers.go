@@ -41,14 +41,14 @@ func ItemApprove(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	ItemId := vars["ItemId"]
 	intId, _ := strconv.Atoi(ItemId)
-	IncItemRating(intId)
+	model.IncItemRating(intId)
 	if err := json.NewEncoder(w).Encode(model.SelectItem(intId)); err != nil {
 		panic(err)
 	}
 }
 
 func ItemCreate(w http.ResponseWriter, r *http.Request) {
-	var item Item
+	var item model.Item
 	body, err := ioutil.ReadAll(io.LimitReader(r.Body, 99999))
 	if err != nil {
 		panic(err)
@@ -64,7 +64,7 @@ func ItemCreate(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	newItem := AddItem(item)
+	newItem := model.AddItem(item)
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusCreated)
 	if err := json.NewEncoder(w).Encode(newItem); err != nil {

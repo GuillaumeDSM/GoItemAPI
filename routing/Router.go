@@ -3,17 +3,19 @@ package routing
 import (
 	"net/http"
 
+	"github.com/GuillaumeDSM/GoItemAPI/model"
+	"github.com/GuillaumeDSM/GoItemAPI/util"
 	"github.com/gorilla/mux"
 )
 
 func NewRouter() *mux.Router {
 
-	loadItems("vdms.json")
+	model.LoadItems("vdms.json")
 	router := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {
 		var handler http.Handler
 
-		handler = Logger(route.HandlerFunc, route.Name)
+		handler = util.Logger(route.HandlerFunc, route.Name)
 
 		router.
 			Methods(route.Method).
