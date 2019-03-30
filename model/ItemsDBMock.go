@@ -1,4 +1,4 @@
-package main
+package model
 
 import (
 	"encoding/json"
@@ -11,7 +11,7 @@ import (
 
 var itemsDB Items
 
-func loadItems(itemFileName string) {
+func .oadItems(itemFileName string) {
 	startTime := time.Now()
 	itemFile, err := os.Open(itemFileName)
 	if err != nil {
@@ -29,11 +29,11 @@ func loadItems(itemFileName string) {
 	return
 }
 
-func selectItem(id int) Item {
+func SelectItem(id int) Item {
 	return itemsDB[id]
 }
 
-func getRandomItem() Item {
+func GetRandomItem() Item {
 	randIndex := rand.Intn(len(itemsDB) - 1)
 	return itemsDB[randIndex]
 }
@@ -43,7 +43,7 @@ func IncItemRating(itemID int) Item {
 	return itemsDB[itemID]
 }
 
-func addItem(item Item) Item {
+func AddItem(item Item) Item {
 	itemsDB = append(itemsDB, item)
 	log.Println("item added at index: ", len(itemsDB)-1)
 	return item

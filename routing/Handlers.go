@@ -1,4 +1,4 @@
-package main
+package routing
 
 import (
 	"encoding/json"
@@ -9,6 +9,8 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+
+	"github.com/GuillaumeDSM/GoItemAPI/model"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -19,7 +21,7 @@ func ItemIndex(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
-	if err := json.NewEncoder(w).Encode(getRandomItem().Text); err != nil {
+	if err := json.NewEncoder(w).Encode(model.GetRandomItem().Text); err != nil {
 		panic(err)
 	}
 }
@@ -30,7 +32,7 @@ func ItemShow(w http.ResponseWriter, r *http.Request) {
 	intId, _ := strconv.Atoi(ItemId)
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
-	if err := json.NewEncoder(w).Encode(selectItem(intId)); err != nil {
+	if err := json.NewEncoder(w).Encode(model.SelectItem(intId)); err != nil {
 		panic(err)
 	}
 }
@@ -40,7 +42,7 @@ func ItemApprove(w http.ResponseWriter, r *http.Request) {
 	ItemId := vars["ItemId"]
 	intId, _ := strconv.Atoi(ItemId)
 	IncItemRating(intId)
-	if err := json.NewEncoder(w).Encode(selectItem(intId)); err != nil {
+	if err := json.NewEncoder(w).Encode(model.SelectItem(intId)); err != nil {
 		panic(err)
 	}
 }
@@ -62,7 +64,7 @@ func ItemCreate(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	newItem := addItem(item)
+	newItem := AddItem(item)
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusCreated)
 	if err := json.NewEncoder(w).Encode(newItem); err != nil {
