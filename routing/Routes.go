@@ -23,6 +23,12 @@ var routes = Routes{
 	Route{
 		"ItemIndex",
 		"GET",
+		"/items",
+		ItemList,
+	},
+	Route{
+		"ItemIndex",
+		"GET",
 		"/item",
 		ItemIndex,
 	},
@@ -40,7 +46,7 @@ var routes = Routes{
 	},
 	Route{
 		"ItemApprove",
-		"GET",
+		"POST",
 		"/item/{ItemId}/approve",
 		ItemApprove,
 	},

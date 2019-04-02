@@ -33,6 +33,10 @@ func SelectItem(id int) Item {
 	return itemsDB[id]
 }
 
+func GetAllItems() []Item {
+	return itemsDB
+}
+
 func GetRandomItem() Item {
 	randIndex := rand.Intn(len(itemsDB) - 1)
 	return itemsDB[randIndex]

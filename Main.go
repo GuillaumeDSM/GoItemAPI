@@ -5,11 +5,13 @@ import (
 	"net/http"
 
 	"github.com/GuillaumeDSM/GoItemAPI/routing"
+	"github.com/gorilla/handlers"
 )
 
 func main() {
 
 	router := routing.NewRouter()
-	log.Fatal(http.ListenAndServe(":8080", router))
+	corsObj := handlers.AllowedOrigins([]string{"*"})
+	log.Fatal(http.ListenAndServe(":8080", handlers.CORS(corsObj)(router)))
 
 }
