@@ -14,6 +14,6 @@ func main() {
 	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type"})
 	originsOK := handlers.AllowedOrigins([]string{"*"})
 	methodsOk := handlers.AllowedMethods([]string{"GET", "POST"})
-	log.Fatal(http.ListenAndServe(":8081", handlers.CORS(headersOk, originsOK, methodsOk)(router)))
+	log.Fatal(http.ListenAndServe(":8080", handlers.CORS(headersOk, originsOK, methodsOk)(router)))
 
 }
