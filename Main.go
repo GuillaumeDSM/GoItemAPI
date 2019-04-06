@@ -11,7 +11,9 @@ import (
 func main() {
 
 	router := routing.NewRouter()
-	corsObj := handlers.AllowedOrigins([]string{"*"})
-	log.Fatal(http.ListenAndServe(":8080", handlers.CORS(corsObj)(router)))
+	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type"})
+	originsOK := handlers.AllowedOrigins([]string{"*"})
+	methodsOk := handlers.AllowedMethods([]string{"GET", "POST"})
+	log.Fatal(http.ListenAndServe(":8081", handlers.CORS(headersOk, originsOK, methodsOk)(router)))
 
 }
